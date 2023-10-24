@@ -1,0 +1,8 @@
+# Ignore the virutal environment
+venv/
+
+# Ignore vscode configurations
+.vscode/
+
+# Ignore crash files
+__pycache__/
