@@ -1,13 +1,18 @@
 import React, {useState, useEffect} from 'react';
 
 const Home = () => {
-
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch('/api')  // This is the Flask API endpoint
-      .then(response => response.json())
-      .then(data => setData(data));
+    fetch('/api', {method: "GET"})  // This is the Flask API endpoint
+      .then(response => {
+        let dataReponse = response.json()
+        console.log(response);
+        return dataReponse
+      })
+      .then(data => {
+        setData(data);
+      });
   }, []);
 
   
