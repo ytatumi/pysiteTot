@@ -24,6 +24,22 @@
   color: white;
 }
 
+.Post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Post p {
+  margin: 0px;
+  padding-right: 10px;
+}
+
+.Post input,
+.Post button {
+  height: fit-content;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -32,6 +48,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
