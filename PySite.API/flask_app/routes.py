@@ -19,7 +19,6 @@ def handle_users():
             print("printing the data recieved from frontend", data)
             current_id += 1
             users[str(current_id)] = data
-
             return jsonify({"message": "Users updated successfully"})
         except Exception as e:
             print("Error occured: ", e)
@@ -37,7 +36,25 @@ def handle_user(user_id):
     - The assignment is to implement the PUT and DELETE methods for the specific ID, see assignment for specific instructions
     """
     if user_id in users:
+        prev_data=users[str(user_id)] 
         if request.method == "GET":
             return jsonify(users[user_id])
+        elif request.method == "PUT":
+            try:
+                data = request.get_json()
+                users[str(user_id)] = data
+                print(f"USER {user_id} {prev_data['name']} : Data has changed to {data}")
+                return jsonify({"message": "A user is updated successfully"})
+            except Exception as e:
+                print("Error occured: ", e)
+                return jsonify({"message": "could not update a user"}), 500
+        elif request.method == "DELETE":
+            try:
+                del users[str(user_id)]
+                print(f"USER {user_id} {prev_data['name']} has been deleted successfully")
+                return jsonify({"message": "A user is deleted successfully"})
+            except Exception as e:
+                print("Error occured: ", e)
+                return jsonify({"message": "could not delete a user"}), 500
     else:
         return jsonify({"message": "User not found"}), 404
