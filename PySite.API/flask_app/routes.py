@@ -6,7 +6,7 @@ current_id = 0
 users = {str(current_id): {"name": "Jonass"}}
 
 
-@app.route("/api/users", methods=["GET", "POST"])
+@app.route("/api/users", methods=["GET", "POST", "PUT", "DELETE"])
 def handle_users():
     global current_id
     if request.method == "GET":
@@ -23,6 +23,26 @@ def handle_users():
         except Exception as e:
             print("Error occured: ", e)
             return jsonify({"message": "could not update users"}), 500
+    
+    elif request.method == "PUT":
+        # Recieved new request to add a user
+        try:
+            data = request.get_json()
+            print("printing the data recieved from frontend", data)
+            for id, value in data.items():
+                users[str(id)] = value
+            return jsonify({"message": "Users updated successfully"})
+        except Exception as e:
+            print("Error occured: ", e)
+            return jsonify({"message": "could not update users"}), 500
+    elif request.method == "DELETE":
+        try:
+            users.clear()
+            print(f"All users have been deleted successfully")
+            return jsonify({"message": "All users are deleted successfully"})
+        except Exception as e:
+            print("Error occured: ", e)
+            return jsonify({"message": "could not delete all users"}), 500 
 
 
 @app.route("/api/users/<user_id>", methods=["GET", "PUT", "DELETE"])
@@ -55,6 +75,6 @@ def handle_user(user_id):
                 return jsonify({"message": "A user is deleted successfully"})
             except Exception as e:
                 print("Error occured: ", e)
-                return jsonify({"message": "could not delete a user"}), 500
+                return jsonify({"message": "could not delete user"}), 500
     else:
         return jsonify({"message": "User not found"}), 404
