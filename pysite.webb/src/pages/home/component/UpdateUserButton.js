@@ -24,7 +24,6 @@ function UpdateUserButton({ data, setData, userId, setRegisteredData }) {
   // console.log({ userId, data });
   return (
     <>
-      {/* <span className="userId">ID: {userId}</span>  */}
       <input
         type="text"
         value={data.users[userId].name || ""}
