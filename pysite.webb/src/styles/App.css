@@ -40,6 +40,22 @@
   height: fit-content;
 }
 
+.AlertMessage{
+  font-size: 14px;
+  font-weight: bold;
+  background-color:red;
+  color:white;
+  padding: 3px;
+  margin:2px;
+  border-radius:5px;
+}
+
+.userId{
+  font-size: 14px;
+  margin:3px;
+  padding:3px;
+}
+
 .App-link {
   color: #61dafb;
 }
